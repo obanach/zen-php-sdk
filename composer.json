@@ -1,0 +1,21 @@
+{
+    "name": "obanach/zen-php-sdk",
+    "description": "PHP client library for creating and retrieving payments via ZEN.COM API",
+    "type": "library",
+    "require": {
+        "php": ">=7.1"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Zen\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oliwer Banach",
+            "email": "obanach@outlook.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
