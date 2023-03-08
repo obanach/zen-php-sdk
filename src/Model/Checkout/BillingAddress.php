@@ -1,6 +1,6 @@
 <?php
 
-namespace Zen\Model\Payment;
+namespace Zen\Model\Checkout;
 
 class BillingAddress {
 

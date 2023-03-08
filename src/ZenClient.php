@@ -1,8 +1,8 @@
 <?php
 
-namespace Zen\Model;
-class ZenCredentials
-{
+namespace Zen;
+
+class ZenClient {
 
     private string $SECRET_KEY;
     private string $IPN_SECRET;
@@ -29,4 +29,7 @@ class ZenCredentials
     {
         return $this->TERMINAL_UUID;
     }
+
+
+
 }

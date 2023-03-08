@@ -1,7 +1,12 @@
 <?php
+
+use Zen\ZenClient;
+
 require_once('vendor/autoload.php');
 
-use Zen\Model\ZenCredentials;
+$client = new ZenClient('$SECRET_KEY', '$IPN_SECRET', '$TERMINAL_UUID');
 
+$payment = new Zen\Model\Checkout\
 
-$zenCredentials = new ZenCredentials('$SECRET_KEY', '$IPN_SECRET', '$TERMINAL_UUID');
+$client
+

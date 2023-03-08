@@ -2,14 +2,13 @@
 
 namespace Zen\Model;
 
-use Zen\Model\Payment\BillingAddress;
-use Zen\Model\Payment\Customer;
-use Zen\Model\Payment\Item;
-use Zen\Model\Payment\ShippingAddress;
+use Zen\Model\Checkout\BillingAddress;
+use Zen\Model\Checkout\Customer;
+use Zen\Model\Checkout\Item;
+use Zen\Model\Checkout\ShippingAddress;
 
-class Payment {
+class Checkout {
 
-    private ZenCredentials $zenCredentials;
     private ?float $amount = null;
     private ?string $currency = null;
     private ?string $transactionId = null;
@@ -22,14 +21,8 @@ class Payment {
     private ?string $urlFailure = null;
     private ?string $customIpnUrl = null;
 
-
-    public function __construct(ZenCredentials $zenCredentials){
-        $this->zenCredentials = $zenCredentials;
-    }
-
-    public function addItem(Item $item): self {
+    public function addItem(Item $item): void {
         $this->items[] = $item;
-        return $this;
     }
 
     public function setCustomer(Customer $customer): self {
@@ -45,6 +38,10 @@ class Payment {
     public function setBillingAddress(BillingAddress $billingAddress): self {
         $this->billingAddress = $billingAddress;
         return $this;
+    }
+
+    public function validate(): void {
+
     }
 
 }
