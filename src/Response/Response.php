@@ -6,7 +6,6 @@ class Response {
 
     private bool $success = false;
     private ?string $response = null;
-
     private ?array $data = null;
 
     public function __construct(?bool $success, ?string $response, ?array $data){

@@ -2,6 +2,8 @@
 
 namespace Zen;
 
+use Zen\Model\Checkout;
+
 class ZenClient {
 
     private string $SECRET_KEY;
@@ -28,6 +30,12 @@ class ZenClient {
     public function getTerminalUuid(): string
     {
         return $this->TERMINAL_UUID;
+    }
+
+    public function createCheckout(Checkout $checkout): void {
+
+
+
     }
 
 
