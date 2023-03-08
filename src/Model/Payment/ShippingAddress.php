@@ -2,7 +2,8 @@
 
 namespace Zen\Model\Payment;
 
-class ShippingAddress
-{
+class ShippingAddress {
+
+    // TODO: implement this class
 
 }
