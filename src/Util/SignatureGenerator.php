@@ -2,7 +2,6 @@
 
 namespace Zen\Util;
 
-class HashCalculator
-{
+class SignatureGenerator {
 
 }
