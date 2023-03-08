@@ -3,7 +3,7 @@
     "description": "PHP client library for creating and retrieving payments via ZEN.COM API",
     "type": "library",
     "require": {
-        "php": ">=7.1"
+        "php": ">=8.1"
     },
     "license": "MIT",
     "autoload": {
