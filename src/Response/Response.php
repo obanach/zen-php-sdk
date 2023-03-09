@@ -4,19 +4,19 @@ namespace Zen\Response;
 
 class Response {
 
-    private bool $success = false;
+    private bool $status = false;
     private ?string $message = null;
     private ?array $data = null;
 
-    public function __construct(bool $success, ?string $message, ?array $data){
-        $this->success = $success;
+    public function __construct(bool $status, ?string $message, ?array $data){
+        $this->status = $status;
         $this->message = $message;
         $this->data = $data;
     }
 
     public function getStatus(): bool
     {
-        return $this->success;
+        return $this->status;
     }
 
     public function getMessage(): ?string

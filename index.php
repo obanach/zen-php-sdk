@@ -13,6 +13,9 @@ $checkout = new Checkout(10.00, 'EUR', 'test');
 $checkout->addItem(new Item('test', 10.00, 1));
 $checkout->setCustomer(new Customer('John', 'Doe', 'john@example.com'));
 
-$client->createCheckout($checkout);
+
+$response = $client->createCheckout($checkout);
+
+echo json_encode($response, JSON_PRETTY_PRINT);
 
 

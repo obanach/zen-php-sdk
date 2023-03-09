@@ -29,7 +29,7 @@ class Checkout {
     }
 
     public function addItem(Item $item): void {
-        $this->items[] += $item;
+        $this->items[] = $item;
     }
 
     public function setCustomer(Customer $customer): self {
@@ -47,6 +47,16 @@ class Checkout {
         return $this;
     }
 
+
+    public function toArray(): array{
+        $result = [];
+        $result['amount'] = $this->amount;
+        $result['currency'] = $this->currency;
+        $result['customer'] = $this->customer->toArray();
+
+        return $result;
+
+    }
 
     /**
      * @return void

@@ -4,6 +4,7 @@ namespace Zen;
 
 use Zen\Model\Checkout;
 use Zen\Model\Configuration;
+use Zen\Util\ModelToArray;
 
 class ZenClient {
 
@@ -19,9 +20,13 @@ class ZenClient {
         $this->configuration = $configuration;
     }
 
-    public function createCheckout(Checkout $checkout): void {
+    public function createCheckout(Checkout $checkout): array {
+        return $checkout->toArray();
 
+    }
 
+    public function validateIpnData(array $data): void
+    {
 
     }
 

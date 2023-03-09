@@ -29,4 +29,12 @@ class Customer {
         return $this->email;
     }
 
+    public function toArray(): array {
+        return [
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'email' => $this->email
+        ];
+    }
+
 }
