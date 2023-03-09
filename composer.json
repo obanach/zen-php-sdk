@@ -2,9 +2,11 @@
     "name": "obanach/zen-php-sdk",
     "description": "PHP client library for creating and retrieving payments via ZEN.COM API",
     "type": "library",
+    "version": "1.0",
     "require": {
         "php": ">=8.1",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "guzzlehttp/guzzle": "^7.5"
     },
     "license": "MIT",
     "autoload": {

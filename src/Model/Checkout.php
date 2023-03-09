@@ -54,12 +54,6 @@ class Checkout {
      */
     public function validate(): void {
 
-        if (is_null($this->amount)) {
-            throw new ZenException("Checkout amount is required.");
-        }
-        if (is_null($this->currency)) {
-            throw new ZenException("Checkout currency is required.");
-        }
         if (is_null($this->customer)) {
             throw new ZenException("Checkout customer is required.");
         }

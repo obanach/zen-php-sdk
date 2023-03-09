@@ -5,12 +5,12 @@ namespace Zen\Response;
 class Response {
 
     private bool $success = false;
-    private ?string $response = null;
+    private ?string $message = null;
     private ?array $data = null;
 
-    public function __construct(?bool $success, ?string $response, ?array $data){
+    public function __construct(bool $success, ?string $message, ?array $data){
         $this->success = $success;
-        $this->response = $response;
+        $this->message = $message;
         $this->data = $data;
     }
 
@@ -19,9 +19,9 @@ class Response {
         return $this->success;
     }
 
-    public function getResponse(): ?string
+    public function getMessage(): ?string
     {
-        return $this->response;
+        return $this->message;
     }
 
     public function getData(): ?array
