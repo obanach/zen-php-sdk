@@ -7,11 +7,18 @@ use Zen\ZenClient;
 
 require_once('vendor/autoload.php');
 
-$client = new ZenClient('$SECRET_KEY', '$IPN_SECRET', '$TERMINAL_UUID');
 
-$checkout = new Checkout(10.00, 'EUR', 'test');
-$checkout->addItem(new Item('test', 10.00, 1));
-$checkout->setCustomer(new Customer('John', 'Doe', 'john@example.com'));
+
+$client = new ZenClient('XXX', 'XXXX', 'XXX');
+
+$item = new Item('Testowe zamowienie', 10.00, 1, 'test', 'test-kat');
+$customer = new Customer('John', 'Doe', 'john@example.com');
+
+$checkout = new Checkout('testowa transakcja1');
+$checkout->setCurrency('EUR');
+$checkout->setAmount(10.00);
+$checkout->addItem($item);
+$checkout->setCustomer($customer);
 
 
 $response = $client->createCheckout($checkout);

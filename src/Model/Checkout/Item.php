@@ -10,11 +10,13 @@ class Item {
     private int $quantity;
     private float $lineAmountTotal;
 
-    public function __construct($name, $price, $quantity){
+    public function __construct($name, $price, $quantity, ?string $code = null, ?string $category = null){
         $this->name = $name;
         $this->price = $price;
         $this->quantity = $quantity;
         $this->lineAmountTotal = $price * $quantity;
+        $this->code = $code;
+        $this->category = $category;
     }
 
     public function getCode(): ?string {
@@ -51,6 +53,16 @@ class Item {
         return $this->lineAmountTotal;
     }
 
+    public function toArray(): array {
+        $result = [];
+        $result['code'] = $this->code;
+        $result['category'] = $this->category;
+        $result['name'] = $this->name;
+        $result['price'] = $this->price;
+        $result['quantity'] = $this->quantity;
+        $result['lineAmountTotal'] = $this->lineAmountTotal;
+        return $result;
+    }
 
 
 }

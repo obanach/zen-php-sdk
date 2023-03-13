@@ -10,8 +10,8 @@ use Zen\Model\Checkout\ShippingAddress;
 
 class Checkout {
 
-    private float $amount;
-    private string $currency;
+    private ?float $amount;
+    private ?string $currency;
     private string $merchantTransactionId;
     private ?Customer $customer = null;
     private ?ShippingAddress $shippingAddress = null;
@@ -22,11 +22,20 @@ class Checkout {
     private ?string $urlFailure = null;
     private ?string $customIpnUrl = null;
 
-    public function __construct(float $amount, string $currency, string $merchantTransactionId) {
-        $this->amount = $amount;
-        $this->currency = $currency;
+    public function __construct(string $merchantTransactionId) {
         $this->merchantTransactionId = $merchantTransactionId;
     }
+
+    public function setAmount(float $amount): self {
+        $this->amount = $amount;
+        return $this;
+    }
+
+    public function setCurrency(string $currency): self {
+        $this->currency = $currency;
+        return $this;
+    }
+
 
     public function addItem(Item $item): void {
         $this->items[] = $item;
@@ -50,9 +59,14 @@ class Checkout {
 
     public function toArray(): array{
         $result = [];
+        $result['merchantTransactionId'] = $this->merchantTransactionId;
         $result['amount'] = $this->amount;
         $result['currency'] = $this->currency;
         $result['customer'] = $this->customer->toArray();
+        foreach ($this->items as $item) {
+            $result['items'][] = $item->toArray();
+        }
+
 
         return $result;
 
