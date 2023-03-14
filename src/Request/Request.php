@@ -7,6 +7,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Zen\Exception\ZenException;
+use Zen\Response\RequestResponse;
 
 class Request {
     protected Client $client;
@@ -15,31 +16,28 @@ class Request {
         return $this;
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function post($path, $data): array {
 
-        $headers = [
-            'Content-Type' => 'application/json'
-        ];
+    public function post($path, $data): array {
 
         try {
             $response = $this->client->request('POST', $path, [
-                'headers' => $headers,
+                'headers' => [
+                    'Content-Type' => 'application/json'
+                ],
                 'json' => $data,
             ]);
-        } catch (ClientException $e) {
-            $response = $e->getResponse();
-            return [
+            $array = [
                 'status' => $response->getStatusCode(),
-                'body' => $response->getBody()->getContents()
+                'body' => json_decode($response->getBody()->getContents(), true)
+            ];
+        } catch (ClientException|GuzzleException $e) {
+            $response = $e->getResponse();
+            $array = [
+                'status' => $response->getStatusCode(),
+                'body' => json_decode($response->getBody()->getContents(), true)
             ];
         }
 
-        return [
-            'status' => $response->getStatusCode(),
-            'body' => $response->getBody()->getContents()
-        ];
+        return $array;
     }
 }

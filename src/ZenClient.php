@@ -7,6 +7,7 @@ use Zen\Exception\ZenException;
 use Zen\Model\Checkout;
 use Zen\Model\Configuration;
 use Zen\Request\Request;
+use Zen\Response\CheckoutResponse;
 use Zen\Util\SignatureGenerator;
 
 class ZenClient {
@@ -32,19 +33,22 @@ class ZenClient {
         $this->configuration = $configuration;
     }
 
-    /**
-     * @throws ZenException
-     * @throws GuzzleException
-     */
-    public function createCheckout(Checkout $checkout): array {
+
+    public function createCheckout(Checkout $checkout): CheckoutResponse {
 
         $params = $checkout->toArray();
         $params += ['terminalUuid' => $this->ZEN_TERMINAL_UUID];
         $signature = new SignatureGenerator($params, $this->ZEN_PAYWALL_SECRET);
-        $params += ['signatures' => $signature->getHash()];
+        $params += ['signature' => $signature->getHash()];
 
         $request = new Request();
-        return $request->post('https://secure.zen.com/api/checkouts', $params);
+        $response = $request->post('https://secure.zen.com/api/checkouts', $params);
+
+        if ($response['status'] !== 201) {
+            return new CheckoutResponse(false, $response['body']['error']['code'].': '.$response['body']['error']['message']);
+        }
+
+        return new CheckoutResponse(true, null, $response['body']['redirectUrl']);
 
     }
 
