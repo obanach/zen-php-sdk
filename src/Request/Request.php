@@ -15,28 +15,22 @@ class Request {
         return $this;
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function post($path, $data): array {
-
-        $headers = [
-            'Content-Type' => 'application/json'
-        ];
 
         try {
             $response = $this->client->request('POST', $path, [
-                'headers' => $headers,
+                'headers' => [
+                    'Content-Type' => 'application/json'
+                ],
                 'json' => $data,
             ]);
-        } catch (ClientException $e) {
+        } catch (ClientException|GuzzleException $e) {
             $response = $e->getResponse();
             return [
                 'status' => $response->getStatusCode(),
                 'body' => $response->getBody()->getContents()
             ];
         }
-
         return [
             'status' => $response->getStatusCode(),
             'body' => $response->getBody()->getContents()
