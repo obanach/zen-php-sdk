@@ -18,7 +18,7 @@ $checkout = new Checkout('testowa transakcja1');
 $checkout->setCurrency('EUR');
 $checkout->setAmount(10.00);
 $checkout->addItem($item);
-$checkout->setCustomer($customer);
+//$checkout->setCustomer($customer);
 
 
 $response = $client->createCheckout($checkout);

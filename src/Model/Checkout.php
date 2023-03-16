@@ -62,7 +62,7 @@ class Checkout {
         $result['merchantTransactionId'] = $this->merchantTransactionId;
         $result['amount'] = $this->amount;
         $result['currency'] = $this->currency;
-        $result['customer'] = $this->customer->toArray();
+        $result['customer'] = $this->customer?->toArray();
         foreach ($this->items as $item) {
             $result['items'][] = $item->toArray();
         }
@@ -71,34 +71,4 @@ class Checkout {
         return $result;
 
     }
-
-    /**
-     * @return void
-     * @throws ZenException
-     */
-    public function validate(): void {
-
-        if (is_null($this->customer)) {
-            throw new ZenException("Checkout customer is required.");
-        }
-        if (is_null($this->items)) {
-            throw new ZenException("At least one item is required.");
-        }
-
-        if (!is_null($this->urlRedirect) && !filter_var($this->urlRedirect, FILTER_VALIDATE_URL)){
-            throw new ZenException("Checkout redirect URL is not a valid URL.");
-        }
-        if (!is_null($this->urlSuccess) && !filter_var($this->urlSuccess, FILTER_VALIDATE_URL)){
-            throw new ZenException("Checkout success URL is not a valid URL.");
-        }
-        if (!is_null($this->urlFailure) && !filter_var($this->urlFailure, FILTER_VALIDATE_URL)){
-            throw new ZenException("Checkout failure URL is not a valid URL.");
-        }
-        if (!is_null($this->customIpnUrl) && !filter_var($this->customIpnUrl, FILTER_VALIDATE_URL)){
-            throw new ZenException("Checkout custom ipn URL is not a valid URL.");
-        }
-
-
-    }
-
 }

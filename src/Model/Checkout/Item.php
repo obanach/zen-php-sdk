@@ -54,15 +54,14 @@ class Item {
     }
 
     public function toArray(): array {
-        $result = [];
-        $result['code'] = $this->code;
-        $result['category'] = $this->category;
-        $result['name'] = $this->name;
-        $result['price'] = $this->price;
-        $result['quantity'] = $this->quantity;
-        $result['lineAmountTotal'] = $this->lineAmountTotal;
-        return $result;
+        return [
+            'code' => $this->code,
+            'category' => $this->category,
+            'name' => $this->name,
+            'price' => $this->price,
+            'quantity' => $this->quantity,
+            'lineAmountTotal' => $this->lineAmountTotal
+        ];
     }
-
 
 }
