@@ -2,60 +2,50 @@
 
 namespace Zen;
 
-use GuzzleHttp\Exception\GuzzleException;
 use Zen\Exception\ZenException;
-use Zen\Model\Checkout;
 use Zen\Model\Configuration;
-use Zen\Request\Request;
 use Zen\Response\CheckoutResponse;
-use Zen\Util\SignatureGenerator;
+use Zen\Response\IpnResponse;
+use Zen\Service\CreateCheckout;
+use Zen\Service\ValidateIpn;
 
 class ZenClient {
 
     private Configuration $configuration;
-    private string $ZEN_TERMINAL_UUID;
-    private string $ZEN_PAYWALL_SECRET;
-    private string $ZEN_IPN_SECRET;
 
     public function __construct(string $ZEN_PAYWALL_SECRET, string $ZEN_IPN_SECRET, string $ZEN_TERMINAL_UUID, ?Configuration $configuration = null) {
-
-        $this->ZEN_PAYWALL_SECRET = $ZEN_PAYWALL_SECRET;
-        $this->ZEN_IPN_SECRET = $ZEN_IPN_SECRET;
-        $this->ZEN_TERMINAL_UUID = $ZEN_TERMINAL_UUID;
-
-
         if (is_null($configuration)) {
             $configuration = new Configuration();
-            $configuration->setSecretKey($ZEN_PAYWALL_SECRET);
+            $configuration->setPaywallSecret($ZEN_PAYWALL_SECRET);
             $configuration->setIpnSecret($ZEN_IPN_SECRET);
             $configuration->setTerminalUuid($ZEN_TERMINAL_UUID);
         }
         $this->configuration = $configuration;
     }
 
+    public function createCheckout(array $data): CheckoutResponse {
+        $checkout = new CreateCheckout($this->configuration, $data);
 
-    public function createCheckout(Checkout $checkout): CheckoutResponse {
-
-        $params = $checkout->toArray();
-        $params += ['terminalUuid' => $this->ZEN_TERMINAL_UUID];
-        $signature = new SignatureGenerator($params, $this->ZEN_PAYWALL_SECRET);
-        $params += ['signature' => $signature->getHash()];
-
-        $request = new Request();
-        $response = $request->post('https://secure.zen.com/api/checkouts', $params);
-
-        if ($response['status'] !== 201) {
-            return new CheckoutResponse(false, $response['body']['error']['code'].': '.$response['body']['error']['message']);
+        try {
+            return $checkout->execute();
+        } catch (ZenException $e) {
+            return new CheckoutResponse(false, $e->getMessage());
         }
 
-        return new CheckoutResponse(true, null, $response['body']['redirectUrl']);
+    }
+
+    public function validateIpn(string $data): IpnResponse {
+        $data = json_decode($data, true);
+        $validate = new ValidateIpn($this->configuration, $data);
+
+        try {
+            return $validate->execute();
+        } catch (ZenException $e) {
+            return new IpnResponse(false, $e->getMessage());
+        }
 
     }
 
-    public function validateIpnData(array $data): void
-    {
-
-    }
 
 
 

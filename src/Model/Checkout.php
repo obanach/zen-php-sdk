@@ -10,9 +10,9 @@ use Zen\Model\Checkout\ShippingAddress;
 
 class Checkout {
 
+    private string $merchantTransactionId;
     private ?float $amount = null;
     private ?string $currency = null;
-    private string $merchantTransactionId;
     private ?Customer $customer = null;
     private ?ShippingAddress $shippingAddress = null;
     private ?BillingAddress $billingAddress = null;
@@ -60,13 +60,13 @@ class Checkout {
     public function toArray(): array{
         $result = [];
         $result['merchantTransactionId'] = $this->merchantTransactionId;
-        $result['amount'] = $this->amount;
-        $result['currency'] = $this->currency;
+        $result['amount'] = $this->amount ?? null;
+        $result['currency'] = $this->currency ?? null;
         $result['customer'] = $this->customer?->toArray();
-        if (!is_null($this->items)) {
-            foreach ($this->items as $item) {
-                $result['items'][] = $item->toArray();
-            }
+        $result['shippingAddress'] = $this->shippingAddress?->toArray();
+        $result['billingAddress'] = $this->billingAddress?->toArray();
+        foreach ($this->items as $item) {
+            $result['items'][] = $item->toArray();
         }
         return $result;
 

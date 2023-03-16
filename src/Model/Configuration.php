@@ -4,16 +4,16 @@ namespace Zen\Model;
 
 class Configuration {
 
-    private string $SECRET_KEY;
+    private string $PAYWALL_SECRET;
     private string $IPN_SECRET;
     private string $TERMINAL_UUID;
 
-    public function getSecretKey(): string {
-        return $this->SECRET_KEY;
+    public function getPaywallSecret(): string {
+        return $this->PAYWALL_SECRET;
     }
 
-    public function setSecretKey(string $SECRET_KEY): self {
-        $this->SECRET_KEY = $SECRET_KEY;
+    public function setPaywallSecret(string $PAYWALL_SECRET): self {
+        $this->PAYWALL_SECRET = $PAYWALL_SECRET;
         return $this;
     }
 

@@ -3,8 +3,8 @@
 namespace Zen\Model\Checkout;
 
 class Item {
-    private ?string $code = null;
-    private ?string $category = null;
+    private ?string $code;
+    private ?string $category;
     private string $name;
     private float $price;
     private int $quantity;
@@ -23,18 +23,16 @@ class Item {
         return $this->code;
     }
 
-    public function setCode(string $code): self {
+    public function setCode(string $code): void {
         $this->code = $code;
-        return $this;
     }
 
     public function getCategory(): ?string {
         return $this->category;
     }
 
-    public function setCategory(string $category): self {
+    public function setCategory(string $category): void {
         $this->category = $category;
-        return $this;
     }
 
     public function getName(): string {
@@ -55,8 +53,8 @@ class Item {
 
     public function toArray(): array {
         return [
-            'code' => $this->code,
-            'category' => $this->category,
+            'code' => $this->code ?? null,
+            'category' => $this->category ?? null,
             'name' => $this->name,
             'price' => $this->price,
             'quantity' => $this->quantity,

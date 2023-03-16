@@ -4,10 +4,10 @@ namespace Zen\Response;
 
 class Response {
 
-    private bool $status = false;
-    private ?string $message = null;
+    private bool $status;
+    private ?string $message;
 
-    public function __construct(bool $status, ?string $message){
+    public function __construct(bool $status, ?string $message = null){
         $this->status = $status;
         $this->message = $message;
     }
