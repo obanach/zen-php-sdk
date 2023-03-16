@@ -11,7 +11,7 @@ class CheckoutResponse extends Response {
         $this->redirectUrl = $redirectUrl;
     }
 
-    public function getRedirectUrl(): ?string {
+    public function getCheckoutUrl(): ?string {
         return $this->redirectUrl;
     }
 }
