@@ -24,11 +24,11 @@ class CreateCheckout {
     /**
      * @throws ZenException
      */
-    public function execute(): CheckoutResponse{
+    public function execute(): string {
         $this->validate();
         $this->signParams();
 
-        return new CheckoutResponse(true, null, $this->makeRequest());
+        return $this->makeRequest();
     }
 
     /**

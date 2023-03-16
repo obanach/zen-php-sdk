@@ -31,7 +31,7 @@ class ZenClient {
         $checkout = new CreateCheckout($this->configuration, $data);
 
         try {
-            return $checkout->execute();
+            return new CheckoutResponse(false, null, $checkout->execute());
         } catch (ZenException $e) {
             return new CheckoutResponse(false, $e->getMessage());
         }
