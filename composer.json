@@ -16,8 +16,14 @@
     "authors": [
         {
             "name": "Oliwer Banach",
-            "email": "obanach@outlook.com"
+            "email": "obanach@outlook.com",
+            "homepage": "https://obanach.pl",
+            "role": "Developer"
         }
     ],
+    "support": {
+        "issues": "https://github.com/obanach/zen-php-sdk/issues",
+        "source": "https://github.com/obanach/zen-php-sdk"
+    },
     "minimum-stability": "stable"
 }
