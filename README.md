@@ -1,4 +1,8 @@
 # Zen.com PHP SDK
+![](https://img.shields.io/packagist/dt/obanach/zen-php-sdk?style=for-the-badge)
+![](https://img.shields.io/github/actions/workflow/status/obanach/zen-php-sdk/php.yml?style=for-the-badge)
+![](https://img.shields.io/packagist/v/obanach/zen-php-sdk?style=for-the-badge)
+
 PHP client library for creating and retrieving payments via ZEN.COM API
 
 ## Usage
