@@ -9,6 +9,10 @@ use Zen\Response\IpnResponse;
 use Zen\Service\CreateCheckout;
 use Zen\Service\ValidateIpn;
 
+/**
+ * Class ZenClient
+ * @package Zen
+ */
 class ZenClient {
 
     private Configuration $configuration;
