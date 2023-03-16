@@ -5,6 +5,11 @@
 
 PHP client library for creating and retrieving payments via ZEN.COM API
 
+## Installation
+```bash
+composer require obanach/zen-php-sdk
+```
+
 ## Usage
 ### Create checkout
 ```php
