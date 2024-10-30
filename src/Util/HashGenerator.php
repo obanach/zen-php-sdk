@@ -17,7 +17,7 @@ class HashGenerator {
      * @param string $ipnSecret IPN Secret of the merchant
      * @return string
      */
-    public static function generate(string $merchantTransactionId, string $currency, float $amount, string $status, string $ipnSecret): string {
+    public static function generate(string $merchantTransactionId, string $currency, string $amount, string $status, string $ipnSecret): string {
         return strtoupper(hash('sha256', $merchantTransactionId.$currency.$amount.$status.$ipnSecret));
     }
 }
